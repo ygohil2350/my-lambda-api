@@ -1,5 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
+Parameters:
+  DB_HOST:
+    Type: String
+    Description: The database host (RDS Endpoint)
+  DB_USER:
+    Type: String
+    Description: The database user
+  DB_PASS:
+    Type: String
+    NoEcho: true
+    Description: The database password
+  DB_NAME:
+    Type: String
+    Description: The database name
 Resources:
   MyApiFunction:
     Type: AWS::Serverless::Function
@@ -11,10 +25,10 @@ Resources:
       Timeout: 20
       Environment:
         Variables:
-          DB_HOST: rdsdbpg174.cfiw6eauwp6t.eu-north-1.rds.amazonaws.com
-          DB_USER: postgres
-          DB_PASS: VgIPRbXvUkGg0WDA 
-          DB_NAME: contatcts
+          DB_HOST: !Ref DB_HOST
+          DB_USER: !Ref DB_USER
+          DB_PASS: !Ref DB_PASS
+          DB_NAME: !Ref DB_NAME
       VpcConfig:
         SubnetIds:
           - subnet-0db8341112d35815d
