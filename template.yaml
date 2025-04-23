@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: handler.handler
+      Runtime: nodejs18.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 20
+      Environment:
+        Variables:
+          DB_HOST: rdsdbpg174.cfiw6eauwp6t.eu-north-1.rds.amazonaws.com
+          DB_USER: postgres
+          DB_PASS: VgIPRbXvUkGg0WDA 
+          DB_NAME: contatcts
+      VpcConfig:
+        SubnetIds:
+          - subnet-0db8341112d35815d
+          - subnet-044f5e62d787161bf
+        SecurityGroupIds:
+          - sg-070d584622d5d9f4b
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /time
+            Method: get

@@ -1,0 +1,22 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/setup-sam@v2
+
+      - name: Build
+        run: sam build
+
+      - name: Deploy
+        run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name my-lambda-api --capabilities CAPABILITY_IAM --region your-region
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
