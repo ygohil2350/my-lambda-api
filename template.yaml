@@ -1,17 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Parameters:
-  DB_HOST:
+  DBHOST:
     Type: String
     Description: The database host (RDS Endpoint)
-  DB_USER:
+  DBUSER:
     Type: String
     Description: The database user
-  DB_PASS:
+  DBPASS:
     Type: String
     NoEcho: true
     Description: The database password
-  DB_NAME:
+  DBNAME:
     Type: String
     Description: The database name
 Resources:
@@ -30,10 +30,10 @@ Resources:
       Timeout: 20
       Environment:
         Variables:
-          DB_HOST: !Ref DB_HOST
-          DB_USER: !Ref DB_USER
-          DB_PASS: !Ref DB_PASS
-          DB_NAME: !Ref DB_NAME
+          DB_HOST: !Ref DBHOST
+          DB_USER: !Ref DBUSER
+          DB_PASS: !Ref DBPASS
+          DB_NAME: !Ref DBNAME
       VpcConfig:
         SubnetIds:
           - subnet-0db8341112d35815d
@@ -56,10 +56,10 @@ Resources:
       Timeout: 20
       Environment:
         Variables:
-          DB_HOST: !Ref DB_HOST
-          DB_USER: !Ref DB_USER
-          DB_PASS: !Ref DB_PASS
-          DB_NAME: !Ref DB_NAME
+          DB_HOST: !Ref DBHOST
+          DB_USER: !Ref DBUSER
+          DB_PASS: !Ref DBPASS
+          DB_NAME: !Ref DBNAME
       VpcConfig:
         SubnetIds:
           - subnet-0db8341112d35815d
@@ -82,10 +82,10 @@ Resources:
       Timeout: 20
       Environment:
         Variables:
-          DB_HOST: !Ref DB_HOST
-          DB_USER: !Ref DB_USER
-          DB_PASS: !Ref DB_PASS
-          DB_NAME: !Ref DB_NAME
+          DB_HOST: !Ref DBHOST
+          DB_USER: !Ref DBUSER
+          DB_PASS: !Ref DBPASS
+          DB_NAME: !Ref DBNAME
       VpcConfig:
         SubnetIds:
           - subnet-0db8341112d35815d
@@ -108,10 +108,10 @@ Resources:
       Timeout: 20
       Environment:
         Variables:
-          DB_HOST: !Ref DB_HOST
-          DB_USER: !Ref DB_USER
-          DB_PASS: !Ref DB_PASS
-          DB_NAME: !Ref DB_NAME
+          DB_HOST: !Ref DBHOST
+          DB_USER: !Ref DBUSER
+          DB_PASS: !Ref DBPASS
+          DB_NAME: !Ref DBNAME
       VpcConfig:
         SubnetIds:
           - subnet-0db8341112d35815d
