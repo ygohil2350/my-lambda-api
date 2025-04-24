@@ -15,12 +15,17 @@ Parameters:
     Type: String
     Description: The database name
 Resources:
-  MyApiFunction:
+  CreateContactFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: handler.handler
+      Handler: src/create.handler
       Runtime: nodejs18.x
-      CodeUri: .
+      Events:
+        CreateApi:
+          Type: Api
+          Properties:
+            Path: /contacts
+            Method: POST
       MemorySize: 128
       Timeout: 20
       Environment:
@@ -35,9 +40,82 @@ Resources:
           - subnet-044f5e62d787161bf
         SecurityGroupIds:
           - sg-070d584622d5d9f4b
+
+  ReadContactsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/read.handler
+      Runtime: nodejs18.x
       Events:
-        Api:
+        ReadApi:
           Type: Api
           Properties:
-            Path: /time
-            Method: get
+            Path: /contacts
+            Method: GET
+      MemorySize: 128
+      Timeout: 20
+      Environment:
+        Variables:
+          DB_HOST: !Ref DB_HOST
+          DB_USER: !Ref DB_USER
+          DB_PASS: !Ref DB_PASS
+          DB_NAME: !Ref DB_NAME
+      VpcConfig:
+        SubnetIds:
+          - subnet-0db8341112d35815d
+          - subnet-044f5e62d787161bf
+        SecurityGroupIds:
+          - sg-070d584622d5d9f4b
+
+  UpdateContactFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/update.handler
+      Runtime: nodejs18.x
+      Events:
+        UpdateApi:
+          Type: Api
+          Properties:
+            Path: /contacts
+            Method: PUT
+      MemorySize: 128
+      Timeout: 20
+      Environment:
+        Variables:
+          DB_HOST: !Ref DB_HOST
+          DB_USER: !Ref DB_USER
+          DB_PASS: !Ref DB_PASS
+          DB_NAME: !Ref DB_NAME
+      VpcConfig:
+        SubnetIds:
+          - subnet-0db8341112d35815d
+          - subnet-044f5e62d787161bf
+        SecurityGroupIds:
+          - sg-070d584622d5d9f4b
+
+  DeleteContactFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/delete.handler
+      Runtime: nodejs18.x
+      Events:
+        DeleteApi:
+          Type: Api
+          Properties:
+            Path: /contacts
+            Method: DELETE
+      MemorySize: 128
+      Timeout: 20
+      Environment:
+        Variables:
+          DB_HOST: !Ref DB_HOST
+          DB_USER: !Ref DB_USER
+          DB_PASS: !Ref DB_PASS
+          DB_NAME: !Ref DB_NAME
+      VpcConfig:
+        SubnetIds:
+          - subnet-0db8341112d35815d
+          - subnet-044f5e62d787161bf
+        SecurityGroupIds:
+          - sg-070d584622d5d9f4b
+
